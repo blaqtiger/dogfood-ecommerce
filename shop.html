@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop - DogFood Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 🔐 Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="js/firebase.js"></script>
+
+  <script>
+    // ✅ Protect page: redirect to login if user not signed in
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        alert("Please log in to access this page.");
+        window.location.href = "login.html";
+      } else {
+        console.log("User logged in:", user.email);
+      }
+    });
+
+    // ✅ Global logout function
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => {
+          alert("Logged out!");
+          window.location.href = "login.html";
+        })
+        .catch(error => {
+          alert("Error logging out: " + error.message);
+        });
+    }
+  </script>
+
+  <header>
+    <h1>🐶 DogFood Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shop-container">
+      <h2>Browse Products</h2>
+      <div class="product-grid" id="product-list">
+        <!-- Product cards will be inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DogFood Co.</p>
+  </footer>
+
+  <!-- 🧠 Product Logic -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

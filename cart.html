@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart - DogFood Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 🔐 Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="js/firebase.js"></script>
+
+  <script>
+    // ✅ Auth protection
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        alert("Please log in to access this page.");
+        window.location.href = "login.html";
+      }
+    });
+
+    // ✅ Global logout
+    function logout() {
+      firebase.auth().signOut()
+        .then(() => {
+          alert("Logged out!");
+          window.location.href = "login.html";
+        })
+        .catch((error) => {
+          alert("Error logging out: " + error.message);
+        });
+    }
+  </script>
+
+  <header>
+    <h1>🐶 DogFood Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div id="cart-total"></div>
+    <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DogFood Co.</p>
+  </footer>
+
+  <!-- 🛒 Cart Logic -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Details - DogFood Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="js/firebase.js"></script>
+
+  <script>
+    // Protect the page
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        alert("Please log in to access product details.");
+        window.location.href = "login.html";
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        alert("Logged out!");
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+
+  <header>
+    <h1>🐶 DogFood Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-detail-container" id="product-detail">
+      <!-- Product detail content will be inserted here by product-details.js -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DogFood Co.</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/product-details.js"></script>
+</body>
+</html>
