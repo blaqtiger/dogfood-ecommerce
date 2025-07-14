@@ -1,37 +1,41 @@
-/* Remove horizontal scroll and preserve full width */
+/* 🌐 Global Styles */
 html, body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
   overflow-x: hidden;
+  overflow-y: auto;
   font-family: sans-serif;
   background: #fff;
   color: #333;
   box-sizing: border-box;
 }
 
-/* Apply box-sizing consistently */
 *, *::before, *::after {
   box-sizing: inherit;
 }
 
+/* 🧭 Header and Nav */
 header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(248, 249, 250, 0.75);
+  background: rgba(0, 0, 0, 0.75); /* Darker background for contrast */
+  color: #fff;
   backdrop-filter: blur(6px);
-  padding: 1rem 2rem;
+  padding: 0.6rem 1rem;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #fff;
 }
 
 nav {
@@ -40,55 +44,29 @@ nav {
 }
 
 nav a {
-  margin: 0.5rem 1rem 0 0;
+  margin-left: 1rem;
   text-decoration: none;
-  color: #333;
+  color: #fff;
   font-weight: bold;
-  white-space: nowrap;
-  position: relative;
   transition: color 0.3s ease;
 }
 
-/* 🔵 Blue underline on hover for normal links */
 nav a:not([onclick]):hover {
-  color: #007bff;
+  color: #00bfff;
   text-decoration: underline;
-  cursor: pointer;
 }
 
-/* 🔴 Red underline on hover for Logout */
 nav a[onclick]:hover {
   color: red;
   text-decoration: underline;
-  cursor: pointer;
 }
 
-.hero {
-  text-align: center;
-  padding: 8rem 2rem 4rem;
-  background-image: url('../../assets/images/dog-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero h2,
-.hero p {
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-}
-
+/* 🔘 Buttons */
 .btn {
   background: #007bff;
   color: #fff;
   padding: 0.75rem 1.5rem;
   border: none;
-  text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
   transition: background 0.3s ease;
@@ -99,59 +77,106 @@ nav a[onclick]:hover {
   background: #0056b3;
 }
 
+/* 🌄 Shop Background Section */
+.horizontal-shop {
+  position: relative;
+  background-image: url('../assets/images/dog-shp.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  z-index: 0;
+}
+
+.horizontal-shop::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Optional overlay */
+  z-index: 1;
+}
+
+/* Shop Content Container */
 .shop-container {
-  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  padding: 1rem 2rem;
+  background:transparent
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+/* 🧃 Product Categories */
+.product-category {
+  margin-bottom: 1.2rem;
 }
 
+.product-category h3 {
+  margin-left: 1rem;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.product-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.product-row::-webkit-scrollbar {
+  height: 8px;
+}
+.product-row::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.product-row::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* 🛒 Product Cards */
 .product-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  min-width: 250px;
+  background: rgba(255, 255, 255, 0.8); /* ✅ Slight transparency */
+  border-radius: 10px;
   padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
+  backdrop-filter: blur(4px); /* ✅ Optional glassy blur */
 }
 
 .product-card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .product-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
 }
-
 .product-card h3 {
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
-
 .product-card p {
   font-size: 0.9rem;
   color: #555;
 }
-
 .product-card .price {
   font-weight: bold;
   color: #007bff;
   margin: 0.5rem 0;
 }
-
 .product-card .btn {
   margin-top: 0.5rem;
-  display: inline-block;
 }
 
+/* 📄 Product Detail Page */
 .product-detail-container {
   max-width: 900px;
   margin: 2rem auto;
@@ -179,12 +204,95 @@ nav a[onclick]:hover {
   margin: 0.5rem 0;
 }
 
-.product-detail-container .btn {
-  display: inline-block;
-  margin-top: 1rem;
+/* 🧱 Footer */
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  z-index: 5;
 }
 
-/* ✅ Responsive Fixes for Mobile */
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* 🔐 Login Page */
+.login-container-wrapper {
+  background-image: url('../assets/images/dog-lg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-container form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container form button {
+  width: 100%;
+}
+
+/* Password visibility toggle */
+.password-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.password-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Remember Me */
+.remember-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.remember-me input {
+  transform: scale(1.1);
+  accent-color: #007bff;
+}
+
+/* 📱 Responsive Fixes */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -202,220 +310,22 @@ nav a[onclick]:hover {
     margin: 0.5rem 0;
   }
 
-  .hero {
-    padding: 6rem 1rem 3rem;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-
   .product-card img {
     height: 180px;
   }
 
-  .product-detail-container {
+  .shop-container {
     padding: 1rem;
   }
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 0.5rem 1rem;
-  text-align: left;
-  z-index: 999;
-}
-
-footer p {
-  margin: 0;
-  line-height: 1.2;
-}
-
-footer .signature {
-  font-style: italic;
-  font-size: 0.8rem;
-  color: #555;
-  text-transform: lowercase;
-}
-
-/* 🔐 Login Background Wrapper */
-.login-container-wrapper {
-  background-image: url('../assets/images/dog-lg.jpg'); /* ✅ Update if your path differs */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 6rem; /* So header doesn’t overlap */
-  padding-bottom: 4rem; /* Leave space for footer */
-}
-
-/* 🧾 Login Form Styling */
-.login-container {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.section-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1811de; /* 🔥 Bold orange - change as needed */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
   text-align: center;
 }
-
-.login-container h2 {
-  margin-bottom: 1rem;
-}
-
-.login-container form input {
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.login-container form button {
-  width: 100%;
-}
-
-/* Show/Hide password styling */
-.password-wrapper {
-  position: relative;
-}
-
-.password-wrapper input[type="password"],
-.password-wrapper input[type="text"] {
-  width: 100%;
-  padding-right: 2.5rem; /* space for eye button */
-}
-
-.toggle-password {
-  position: absolute;
-  right: 0.75rem;            /* Push to far right */
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-  padding: 0;
-  color: #555;
-  line-height: 1;
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  margin: 0.5rem 0 1rem;
-  cursor: pointer;
-}
-
-.remember-me input {
-  margin: 0; /* reset browser default spacing */
-}
-
-.form-group {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.remember-group {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* align left */
-  padding-left: 2px; /* optional: slight nudge to match input edges */
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.remember-me input {
-  margin: 0;
-  transform: scale(1.1); /* optional: slightly larger checkbox */
-}
-
-.remember-me input {
-  accent-color: #007bff; /* matches your button theme */
-}
-
-.login-links p {
-  margin: 0.25rem 0;
-  font-size: 0.85rem;
-  color: #555;
-  text-align: center;
-}
-
-.login-links a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.login-links a:hover {
-  text-decoration: underline;
-}
-
-.remember-group {
-  margin-bottom: 0.25rem; /* 🔽 tighten spacing below the checkbox */
-}
-
-#login-form .btn {
-  margin-top: 0.15rem; /* 🔽 tighten spacing above the button */
-}
-
-.strength-indicator {
-  font-size: 0.85rem;
-  margin: -0.5rem 0 0.5rem;
-  text-align: left;
-  color: #d9534f;
-}
-
-.password-wrapper {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.password-wrapper input {
-  width: 100%;
-  padding-right: 2.5rem;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-}
-
-
-
-
 

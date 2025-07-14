@@ -14,7 +14,6 @@
   <script src="js/firebase.js"></script>
 
   <script>
-    // ✅ Protect page: redirect to login if user not signed in
     firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         alert("Please log in to access this page.");
@@ -24,7 +23,6 @@
       }
     });
 
-    // ✅ Global logout function
     function logout() {
       firebase.auth().signOut()
         .then(() => {
@@ -37,6 +35,7 @@
     }
   </script>
 
+  <!-- 🔝 Header -->
   <header>
     <h1>🐶 DogFood Store</h1>
     <nav>
@@ -48,20 +47,22 @@
     </nav>
   </header>
 
-  <main>
+  <!-- 🛍️ Shop Section -->
+  <main class="horizontal-shop">
     <section class="shop-container">
-      <h2>Browse Products</h2>
-      <div class="product-grid" id="product-list">
-        <!-- Product cards will be inserted here -->
+     <h2 class="section-heading">Browse Products</h2>
+      <div id="product-list">
+        <!-- Product categories and cards will be injected here -->
       </div>
     </section>
   </main>
 
+  <!-- 🔻 Footer -->
   <footer>
     <p>&copy; 2025 DogFood Co.</p>
   </footer>
 
-  <!-- 🧠 Product Logic -->
+  <!-- 📦 Product Logic -->
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
 
