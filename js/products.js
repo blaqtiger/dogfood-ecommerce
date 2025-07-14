@@ -1,29 +1,61 @@
 // Static products array with categories
-const products = [
+ const products = [
   {
     id: 1,
     name: "Premium Dry Dog Food",
     price: 24.99,
-    image: "assets/images/dry-dog-food.jpg",
+    image: "assets/images/dog-dryfood.webp",
     description: "Nutritious dry food for adult dogs.",
     category: "Dry Food"
   },
+
+     {
+    id: 1,
+    name: "Premium Dry Dog Food",
+    price: 24.99,
+    image: "assets/images/dog-dryfood.webp",
+    description: "Nutritious dry food for adult dogs.",
+    category: "Dry Food"
+  },
+
+
   {
     id: 2,
     name: "Chicken & Rice Wet Food",
     price: 18.99,
-    image: "assets/images/wet-dog-food.jpg",
+    image: "assets/images/dog-wetfood.webp",
     description: "Tasty wet food with real chicken and rice.",
     category: "Wet Food"
   },
+
+   {
+    id: 2,
+    name: "Chicken & Rice Wet Food",
+    price: 18.99,
+    image: "assets/images/dog-wetfood.webp",
+    description: "Tasty wet food with real chicken and rice.",
+    category: "Wet Food"
+  },
+
   {
     id: 3,
     name: "Grain-Free Puppy Formula",
     price: 29.99,
-    image: "assets/images/puppy-food.jpg",
+    image: "assets/images/dog-puppyfood.webp",
     description: "Specially made for growing puppies.",
     category: "Puppy Food"
-  }
+  },
+
+   {
+    id: 3,
+    name: "Grain-Free Puppy Formula",
+    price: 29.99,
+    image: "assets/images/dog-puppyfood.webp",
+    description: "Specially made for growing puppies.",
+    category: "Puppy Food"
+  },   
+
+
 ];
 
 // Render product cards into product-list container, grouped by category
