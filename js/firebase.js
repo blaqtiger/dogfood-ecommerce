@@ -1,9 +1,10 @@
-// Import the functions you need from the SDKs
+// Import the functions you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // <-- Firestore imports
+import { getAuth, signOut } from "firebase/auth";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
-// Your Firebase config
+// 🔐 Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAE82hmsNZLVTya3E5PxFHO8Do_xCQFb-s",
   authDomain: "dogfoodstore-25f9c.firebaseapp.com",
@@ -14,42 +15,59 @@ const firebaseConfig = {
   measurementId: "G-1SXXE21TZ8"
 };
 
-// Initialize Firebase
+// 🔧 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getFirestore(app); // Initialize Firestore
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-// 🔄 Example: Add a product to the "products" collection
+// 📥 Add Product (Optional Utility)
 export async function addProduct(name, price, inStock) {
   try {
     const docRef = await addDoc(collection(db, "products"), {
-      name: name,
-      price: price,
-      inStock: inStock
+      name,
+      price,
+      inStock
     });
-    console.log("Product added with ID: ", docRef.id);
+    console.log("✅ Product added with ID:", docRef.id);
   } catch (e) {
-    console.error("Error adding product: ", e);
+    console.error("❌ Error adding product:", e);
   }
 }
 
-// 📦 Example: Get all products from the "products" collection
+// 📤 Save Order to Firestore
+export async function saveOrder(orderData) {
+  try {
+    const docRef = await addDoc(collection(db, "orders"), orderData);
+    console.log("✅ Order saved with ID:", docRef.id);
+    return docRef.id;
+  } catch (e) {
+    console.error("❌ Error saving order:", e);
+    throw e;
+  }
+}
+
+// 📦 Get Products (Optional Utility)
 export async function getProducts() {
   try {
     const querySnapshot = await getDocs(collection(db, "products"));
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => `, doc.data());
+      console.log(`${doc.id} =>`, doc.data());
     });
   } catch (e) {
-    console.error("Error fetching products: ", e);
+    console.error("❌ Error fetching products:", e);
   }
 }
 
-function logout() {
-  firebase.auth().signOut().then(() => {
+// 🔓 Logout Helper
+export async function logoutUser() {
+  try {
+    await signOut(auth);
     window.location.href = "login.html";
-  }).catch((error) => {
-    console.error("Logout error:", error.message);
-  });
+  } catch (error) {
+    console.error("❌ Logout error:", error.message);
+  }
 }
 
+// Export auth and db for other uses
+export { auth, db };

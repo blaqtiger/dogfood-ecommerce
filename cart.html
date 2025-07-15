@@ -11,27 +11,24 @@
   <!-- 🔐 Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="js/firebase.js"></script>
 
   <script>
-    // ✅ Auth protection
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (!user) {
-        alert("Please log in to access this page.");
+        alert("Please log in to view your cart.");
         window.location.href = "login.html";
       }
     });
 
-    // ✅ Global logout
     function logout() {
       firebase.auth().signOut()
         .then(() => {
           alert("Logged out!");
           window.location.href = "login.html";
         })
-        .catch((error) => {
-          alert("Error logging out: " + error.message);
-        });
+        .catch((error) => alert("Logout error: " + error.message));
     }
   </script>
 
@@ -41,25 +38,56 @@
       <a href="index.html">Home</a>
       <a href="shop.html">Shop</a>
       <a href="cart.html">Cart</a>
-      <a href="login.html">Login</a>
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
 
-  <main class="cart-container">
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <div id="cart-total"></div>
-    <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+  <main class="cart-page">
+    <div class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div id="cart-total"></div>
+      <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+    </div>
   </main>
+
+  <!-- 🧾 Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Checkout Details</h2>
+      <form id="checkoutForm" onsubmit="submitCheckout(event)">
+  <label for="name">Name:</label>
+  <input type="text" id="name" required />
+
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" required />
+
+  <label for="address">Address:</label>
+  <textarea id="address" rows="3" required></textarea>
+
+  <label for="payment">Payment Method:</label>
+  <select id="payment" required onchange="handlePaymentChange()">
+    <option value="" disabled selected>Select a method</option>
+    <option value="Mpesa">Mpesa</option>
+    <option value="Card">Card</option>
+    <option value="PayPal">PayPal</option>
+    <option value="Cash on Delivery">Cash on Delivery</option>
+  </select>
+
+  <div id="payment-extra"></div> <!-- 🔄 Dynamic section -->
+
+  <button type="submit" class="btn">Submit</button>
+</form>
+
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2025 DogFood Co.</p>
   </footer>
 
-  <!-- 🛒 Cart Logic -->
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
-
 </body>
 </html>
