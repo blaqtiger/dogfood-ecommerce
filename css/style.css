@@ -15,13 +15,56 @@ html, body {
   box-sizing: inherit;
 }
 
+/* 🐶 Hero Section */
+.hero {
+  background-image: url('../assets/images/dog-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 6rem 1rem;
+  text-align: center;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Optional overlay for contrast */
+  z-index: 0;
+}
+
+.hero h2,
+.hero p,
+.hero .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* 🔘 Shop Now Button (Shortened) */
+#shopNowBtn {
+  display: block;
+  width: 120px;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-align: center;
+  margin: 1rem auto 0 auto;
+}
+
 /* 🧭 Header and Nav */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.75); /* Darker background for contrast */
+  background: rgba(0, 0, 0, 0.75);
   color: #fff;
   backdrop-filter: blur(6px);
   padding: 0.6rem 1rem;
@@ -95,7 +138,7 @@ nav a[onclick]:hover {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* Optional overlay */
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 
@@ -104,7 +147,7 @@ nav a[onclick]:hover {
   position: relative;
   z-index: 2;
   padding: 1rem 2rem;
-  background:transparent
+  background: transparent;
 }
 
 /* 🧃 Product Categories */
@@ -140,14 +183,14 @@ nav a[onclick]:hover {
 /* 🛒 Product Cards */
 .product-card {
   min-width: 250px;
-  background: rgba(255, 255, 255, 0.8); /* ✅ Slight transparency */
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   padding: 1rem;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   flex-shrink: 0;
   text-align: center;
   transition: box-shadow 0.3s ease;
-  backdrop-filter: blur(4px); /* ✅ Optional glassy blur */
+  backdrop-filter: blur(4px);
 }
 
 .product-card:hover {
@@ -300,6 +343,12 @@ footer p {
     padding: 1rem;
   }
 
+  #shopNowBtn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    width: 100px;
+  }
+
   nav {
     flex-direction: column;
     width: 100%;
@@ -322,10 +371,9 @@ footer p {
 .section-heading {
   font-size: 2rem;
   font-weight: 800;
-  color: #1811de; /* 🔥 Bold orange - change as needed */
+  color: #1811de;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 1rem;
   text-align: center;
 }
-
